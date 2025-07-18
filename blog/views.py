@@ -6,12 +6,17 @@ from .forms import BlogForm
 
 def create_blog(request):
     success = False
+    post = None
     if request.method == 'POST':
-        form = BlogForm(request.POST)
+        form = BlogForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            post = form.save()
             success = True
             form = BlogForm()  # Reset the form after successful submission
     else:
         form = BlogForm()
-    return render(request, 'blog/create_blog.html', {'form': form, 'success': success})
+    return render(request, 'blog/create_blog.html', {
+        'form': form, 
+        'success': success,
+        'post': post
+    })
