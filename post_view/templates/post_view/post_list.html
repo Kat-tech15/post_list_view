@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #fff;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #343a40;
+            margin-bottom: 30px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+        }
+
+        li:last-child {
+            border-bottom: none;
+        }
+
+        h3 {
+            margin: 0;
+            color: #007bff;
+        }
+
+        p {
+            margin: 5px 0 10px;
+            color: #495057;
+        }
+
+        small {
+            color: #6c757d;
+        }
+    </style>
+
+    <div class="container">
+        <h1>📝 Post List</h1>
+        {% if posts %}
+            <ul>
+                {% for post in posts %}
+                    <li>
+                        <h3>{{ post.title }}</h3>
+                        <p>{{ post.content }}</p>
+                        <small>Published: {{ post.published_at|date:"M d, Y H:i" }}</small>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No posts yet.</p>
+        {% endif %}
+    </div>
+{% endblock %}
